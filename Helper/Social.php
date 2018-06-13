@@ -83,6 +83,7 @@ class Social extends HelperData
             'LinkedIn'  => ["fields" => ['id', 'first-name', 'last-name', 'email-address']],
             'Vkontakte' => ['wrapper' => ['class' => '\Mageplaza\SocialLogin\Model\Providers\Vkontakte']],
             'Instagram' => ['wrapper' => ['class' => '\Mageplaza\SocialLogin\Model\Providers\Instagram']],
+            'B2C' => ['wrapper' => ['class' => '\Mageplaza\SocialLogin\Model\Providers\B2C']],
             'Github'    => ['wrapper' => ['class' => '\Mageplaza\SocialLogin\Model\Providers\GitHub']],
             'Amazon'    => ['wrapper' => ['class' => '\Mageplaza\SocialLogin\Model\Providers\Amazon']],
             'Google'    => ['scope' => 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/plus.profile.emails.read']
@@ -141,10 +142,10 @@ class Social extends HelperData
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getAuthUrl($type)
-    {
+    {   
         $authUrl = $this->getBaseAuthUrl();
-
         $type = $this->setType($type);
+        
         switch ($type) {
             case 'Facebook':
                 $param = 'hauth_done=' . $type;
@@ -152,6 +153,9 @@ class Social extends HelperData
             case 'Live':
                 $param = null;
                 break;
+            case 'B2C':
+                $param = null;
+                break;                
             case 'Yahoo':
                 return $this->getDomainUrl();
                 break;
@@ -179,7 +183,8 @@ class Social extends HelperData
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getBaseAuthUrl()
-    {
+    {   
+        //exit();
         return $this->_getUrl('sociallogin/social/callback', ['_nosid' => true, '_scope' => $this->getScopeUrl()]);
     }
 
@@ -213,6 +218,7 @@ class Social extends HelperData
             'foursquare' => 'Foursquare',
             'vkontakte'  => 'Vkontakte',
             'instagram'  => 'Instagram',
+            'b2c'  => 'B2C',
             'github'     => 'Github'
         ];
     }

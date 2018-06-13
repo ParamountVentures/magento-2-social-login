@@ -242,7 +242,7 @@ class Social extends AbstractModel
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getUserProfile($apiName)
-    {
+    { 
         $config = [
             "base_url"   => $this->apiHelper->getBaseAuthUrl(),
             "providers"  => [
@@ -250,10 +250,20 @@ class Social extends AbstractModel
             ],
             "debug_mode" => false
         ];
-
+        
+        
         $auth    = new \Hybrid_Auth($config);
-        $adapter = $auth->authenticate($apiName, $this->apiHelper->getAuthenticateParams($apiName));
 
+        //###   
+        //echo($config["base_url"]);
+        //echo json_encode($config["providers"]);
+        
+        //echo($this->apiHelper->getAuthenticateParams($apiName));
+        //
+
+
+        $adapter = $auth->authenticate($apiName, $this->apiHelper->getAuthenticateParams($apiName));
+        
         return $adapter->getUserProfile();
     }
 

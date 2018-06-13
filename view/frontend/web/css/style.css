@@ -928,6 +928,50 @@
     background-color: #fff
 }
 
+.btn-b2c {
+    color: #fff;
+    background-color: #9b3f3f;
+    border-color: rgba(0, 0, 0, 0.2)
+}
+
+.btn-b2c:focus, .btn-b2c.focus {
+    color: #fff;
+    background-color: #307768;
+    border-color: rgba(0, 0, 0, 0.2)
+}
+
+.btn-b2c:hover {
+    color: #fff;
+    background-color: #305777;
+    border-color: rgba(0, 0, 0, 0.2)
+}
+
+.btn-b2c:active, .btn-b2c.active, .open > .dropdown-toggle.btn-b2c {
+    color: #fff;
+    background-color: #305777;
+    border-color: rgba(0, 0, 0, 0.2)
+}
+
+.btn-b2c:active:hover, .btn-b2c.active:hover, .open > .dropdown-toggle.btn-b2c:hover, .btn-b2c:active:focus, .btn-b2c.active:focus, .open > .dropdown-toggle.btn-b2c:focus, .btn-b2c:active.focus, .btn-b2c.active.focus, .open > .dropdown-toggle.btn-b2c.focus {
+    color: #fff;
+    background-color: #26455d;
+    border-color: rgba(0, 0, 0, 0.2)
+}
+
+.btn-b2c:active, .btn-b2c.active, .open > .dropdown-toggle.btn-b2c {
+    background-image: none
+}
+
+.btn-b2c.disabled:hover, .btn-b2c[disabled]:hover, fieldset[disabled] .btn-b2c:hover, .btn-b2c.disabled:focus, .btn-b2c[disabled]:focus, fieldset[disabled] .btn-b2c:focus, .btn-b2c.disabled.focus, .btn-b2c[disabled].focus, fieldset[disabled] .btn-b2c.focus {
+    background-color: #3f729b;
+    border-color: rgba(0, 0, 0, 0.2)
+}
+
+.btn-b2c .badge {
+    color: #3f729b;
+    background-color: #fff
+}
+
 .btn-linkedin {
     color: #fff;
     background-color: #007bb6;

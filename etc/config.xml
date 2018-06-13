@@ -59,6 +59,9 @@
             <instagram>
                 <sort_order>800</sort_order>
             </instagram>
+            <b2c>
+                <sort_order>801</sort_order>
+            </b2c>             
             <vkontakte>
                 <sort_order>900</sort_order>
             </vkontakte>

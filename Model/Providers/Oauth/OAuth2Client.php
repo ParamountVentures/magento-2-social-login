@@ -87,6 +87,7 @@ class OAuth2Client
             }
         }
 
+        
         return $this->authorize_url . "?" . http_build_query($params, '', '&');
     }
 

@@ -29,6 +29,7 @@ define([
      * @param windowObj
      */
     window.socialCallback = function (url, windowObj) {
+        this.alert(url);
         customerData.invalidate(['customer']);
         customerData.reload(['customer'], true);
 
