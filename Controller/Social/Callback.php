@@ -33,6 +33,13 @@ class Callback extends AbstractSocial
      */
     public function execute()
     {
+        // deal with b2c case
+        if (strrpos($_SERVER['SCRIPT_NAME'], 'b2c.php') === strlen($_SERVER['SCRIPT_NAME'])-strlen('b2c.php') 
+        && (isset($_GET['code']))) 
+        {
+            $_REQUEST['hauth_done'] = 'B2C';
+        }
+        
         if ($this->checkRequest('hauth_start', false) && (
                 $this->checkRequest('error_reason', 'user_denied')
                 && $this->checkRequest('error', 'access_denied')
