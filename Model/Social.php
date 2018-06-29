@@ -124,7 +124,7 @@ class Social extends AbstractModel
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getCustomerBySocial($identify, $type)
-    {
+    {       
         $customer = $this->customerFactory->create();
 
         $socialCustomer = $this->getCollection()
@@ -162,7 +162,7 @@ class Social extends AbstractModel
      * @throws \Exception
      */
     public function createCustomerSocial($data, $store)
-    {
+    {        
         /** @var CustomerInterface $customer */
         $customer = $this->customerDataFactory->create();
         $customer->setFirstname($data['firstname'])
@@ -254,14 +254,6 @@ class Social extends AbstractModel
         
         $auth    = new \Hybrid_Auth($config);
 
-        //###   
-        //echo($config["base_url"]);
-        //echo json_encode($config["providers"]);
-        
-        //echo($this->apiHelper->getAuthenticateParams($apiName));
-        //
-
-
         $adapter = $auth->authenticate($apiName, $this->apiHelper->getAuthenticateParams($apiName));
         
         return $adapter->getUserProfile();
@@ -277,7 +269,9 @@ class Social extends AbstractModel
             "keys"    => [
                 'id'     => $this->apiHelper->getAppId(),
                 'key'    => $this->apiHelper->getAppId(),
-                'secret' => $this->apiHelper->getAppSecret()
+                'secret' => $this->apiHelper->getAppSecret(),
+                'tenant' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/tenant"),
+                'policy' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/policy")
             ]
         ];
 

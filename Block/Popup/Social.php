@@ -95,7 +95,7 @@ class Social extends Template
      * @return array
      */
     public function getSocialButtonsConfig()
-    {
+    {        
         $availableButtons = $this->getAvailableSocials();
         foreach ($availableButtons as $key => &$button) {
             $button['url']     = $this->getLoginUrl($key, ['authen' => 'popup']);

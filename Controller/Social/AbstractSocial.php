@@ -238,12 +238,16 @@ abstract class AbstractSocial extends Action
      * @param null $content
      * @return \Magento\Framework\Controller\Result\Raw
      */
-    public function _appendJs($content = null)
+    public function _appendJs($content = null, $type = null)
     {
         /** @var \Magento\Framework\Controller\Result\Raw $resultRaw */
         $resultRaw = $this->resultRawFactory->create();
 
-        return $resultRaw->setContents($content ?: sprintf("<script>window.opener.socialCallback('%s', window);</script>", $this->_loginPostRedirect()));
+        if ($type == "B2C") {
+            return $resultRaw->setContents($content ?: sprintf("<script>window.location.href='/customer/account/login';</script>"));
+        } else {
+            return $resultRaw->setContents($content ?: sprintf("<script>window.opener.socialCallback('%s', window);</script>", $this->_loginPostRedirect()));
+        }
     }
 
     /**

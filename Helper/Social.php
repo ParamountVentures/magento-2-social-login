@@ -136,6 +136,15 @@ class Social extends HelperData
         return $appSecret;
     }
 
+        /**
+     * @param null $storeId
+     * @return mixed
+     */
+    public function getAppValue($key, $storeId = null)
+    {
+        return $this->getConfigValue("sociallogin/{$this->_type}/" . $key, $storeId);
+    }
+
     /**
      * @param $type
      * @return mixed|string

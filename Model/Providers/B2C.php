@@ -7,7 +7,8 @@
 
 namespace Mageplaza\SocialLogin\Model\Providers;
 
-use \vendor\Firebase\JWT\JWT;
+use \Firebase\JWT\JWT;
+use \phpseclib\Crypt\RSA;
 
 /**
  * Hybrid_Providers_Instagram (By Sebastian Lasse - https://github.com/sebilasse)
@@ -20,6 +21,8 @@ class B2C extends \Hybrid_Provider_Model_OAuth2
     // used when verifying the jwt
     private $RSA;
     private $JWT;    
+    private $policy_qs;
+    private $tenant;
 
     /**
      * IDp wrappers initializer
@@ -27,24 +30,19 @@ class B2C extends \Hybrid_Provider_Model_OAuth2
      */
     function initialize()
     {
-        // Turn on error reporting, for debugging
-        error_reporting(E_ALL);
-        ini_set('display_errors', 'On');
-
         parent::initialize();
 
         // Provider api end-points
-        $this->key_url = "https://login.microsoftonline.com/citymessenger.onmicrosoft.com/discovery/v2.0/keys";// . $this->policy_qs;
+        $this->tenant = $this->config["keys"]["tenant"];
+        $this->policy_qs = $this->config["keys"]["policy"];
+        $this->key_url = "https://login.microsoftonline.com/" . $this->tenant . ".onmicrosoft.com/discovery/v2.0/keys?p=" . $this->policy_qs;
         $this->api->api_base_url  = "https://graph.windows.net";
-        $this->api->authorize_url = "https://login.microsoftonline.com/citymessenger.onmicrosoft.com/oauth2/v2.0/authorize";
-        $this->api->token_url     = "https://login.microsoftonline.com/citymessenger.onmicrosoft.com/oauth2/v2.0/token";
+        $this->api->authorize_url = "https://login.microsoftonline.com/" . $this->tenant . ".onmicrosoft.com/oauth2/v2.0/authorize";
+        $this->api->token_url     = "https://login.microsoftonline.com/" . $this->tenant . ".onmicrosoft.com/oauth2/v2.0/token?p=" . $this->policy_qs;
 
         
-        $this->JWT = new JWT();      
-        echo("11111");exit();
-        $this->RSA = new Crypt_RSA();
-        
-        echo(serialize($this->RSA));
+        $this->JWT = new JWT();              
+        $this->RSA = new RSA();
     }
 
     /**
@@ -67,53 +65,29 @@ class B2C extends \Hybrid_Provider_Model_OAuth2
      * @throws \Exception
      */
     function getUserProfile()
-    {        
+    {   
         // in B2C the profile data is stored in the token jwt, so decode this, verify it and extract the details
         // extract data from id_token        
         $result = $this->validate_id_token($this->api->id_token);
-        if (!$result[0]) {
+
+        if (!$result["success"]) {
             echo("Parsing the token failed.");
             exit();
         }
 
-        echo("Parsed the token !!!!!!!");
-        exit();
+        $data = $result["payload"];
 
-
-
-        echo("Id Token ===\n");
-
-//echo(serialize($this->api));
-exit();
-        $endpoint         = '/citymessenger.net/me?api-version=1.6';
-        $params           = [
-            'access_token' => $this->api->access_token,
-        ];
-        $sig              = $this->generateSig($endpoint, $params, $this->api->client_secret);
-        $params           = [
-            "sig" => $sig
-        ];
-        $urlEncodedParams = http_build_query($params, '', '&');
-
-        //$url  = "users/self/" . (strpos("users/self/", '?') ? '&' : '?') . $urlEncodedParams;
-        $url = $endpoint . '&' . $urlEncodedParams;
-        //echo($url);
-        //exit();
-        $data = $this->api->api($url);
-        if ($data->meta->code != 200) {
-            throw new \Exception("User profile request failed! {$this->providerId} returned an invalid response.", 6);
-        }
-
-        $this->user->profile->identifier  = $data->data->id;
-        echo($data->data->id);
-        exit();
-        //$this->user->profile->displayName = $data->data->full_name ? $data->data->full_name : $data->data->username;
-        //$this->user->profile->description = $data->data->bio;
-        //$this->user->profile->photoURL    = $data->data->profile_picture;
-
-        //$this->user->profile->webSiteURL = $data->data->website;
-
-        //$this->user->profile->username = $data->data->username;
+        $this->user->profile->identifier  = $data->oid;        
+        $this->user->profile->username = $data->name;
+        $this->user->profile->displayName = $data->name;
+        $this->user->profile->firstName = $data->given_name ? $data->given_name : $this->user->profile->displayName;
+        $this->user->profile->lastName = $data->family_name ? $data->family_name : "[" . $this->tenant . "]";
+        
+        if (!empty($data->emails))
+        {
+            $this->user->profile->email = $data->emails[0];
+            $this->user->profile->emailVerified = true;
+        }                
 
         return $this->user->profile;
     }
@@ -132,7 +106,7 @@ exit();
 			<Modulus>' . $modulus . '</Modulus>
 			<Exponent>' . $exponent . '</Exponent>
             </RSAKeyValue>');
-            echo(serialize($modulus));exit();
+            
         $public_key = $this->RSA->getPublicKey();
         try {
             $decoded = $this->JWT->decode($id_token, $public_key, array('RS256'));

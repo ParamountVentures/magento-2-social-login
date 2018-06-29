@@ -394,6 +394,18 @@
                         <field id="is_enabled">1</field>
                     </depends>
                 </field>
+                <field id="tenant" translate="label" type="text" sortOrder="41" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tenant</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="policy" translate="label" type="text" sortOrder="42" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Policy</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                </field>
                 <field id="sort_order" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Sort Order</label>
                     <depends>

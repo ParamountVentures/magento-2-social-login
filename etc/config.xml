@@ -61,6 +61,7 @@
             </instagram>
             <b2c>
                 <sort_order>801</sort_order>
+                <default_login_page>/sociallogin/social/login/type/b2c/</default_login_page>
             </b2c>             
             <vkontakte>
                 <sort_order>900</sort_order>

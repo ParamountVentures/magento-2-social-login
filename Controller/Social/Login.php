@@ -64,7 +64,7 @@ class Login extends AbstractSocial
         }
         $this->refresh($customer);
 
-        return $this->_appendJs();
+        return $this->_appendJs(null, $type);
     }
 
     /**

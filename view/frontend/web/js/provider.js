@@ -29,10 +29,10 @@ define([
      * @param windowObj
      */
     window.socialCallback = function (url, windowObj) {
-        this.alert(url);
+        
         customerData.invalidate(['customer']);
         customerData.reload(['customer'], true);
-
+this.alert(url);
         if (url !== '') {
             window.location.href = url;
         } else {
@@ -51,7 +51,7 @@ define([
                 });
             },
 
-            openPopup: function () {
+            openPopup: function () {                
                 window.open(config.url, config.label, this.getPopupParams());
             },
 

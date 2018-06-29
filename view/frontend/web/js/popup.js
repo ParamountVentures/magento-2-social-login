@@ -106,7 +106,7 @@ define([
         /**
          * Init links login
          */
-        initLink: function () {
+        initLink: function () {            
             var self = this,
                 headerLink = $(this.options.headerLink);
 
@@ -124,8 +124,7 @@ define([
                                 self.showCreate();
                             } else {
                                 self.showLogin();
-                            }
-
+                            }                            
                             event.preventDefault();
                         });
                     }
