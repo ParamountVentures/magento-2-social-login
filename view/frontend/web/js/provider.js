@@ -32,7 +32,7 @@ define([
         
         customerData.invalidate(['customer']);
         customerData.reload(['customer'], true);
-this.alert(url);
+
         if (url !== '') {
             window.location.href = url;
         } else {

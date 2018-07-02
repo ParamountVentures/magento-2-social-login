@@ -125,6 +125,7 @@ define([
                             } else {
                                 self.showLogin();
                             }                            
+                            
                             event.preventDefault();
                         });
                     }
