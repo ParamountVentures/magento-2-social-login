@@ -29,6 +29,9 @@
             <block class="Magento\Framework\View\Element\Js\Components" name="captcha_page_head_components" ifconfig="sociallogin/general/enabled" template="Magento_Captcha::js/components.phtml"/>
         </referenceBlock>
 
+        <!-- Remove the register link as we register via B2C -->
+        <referenceBlock name="register-link" remove="true"/>
+
         <!-- Fix Porto Popup login -->
         <referenceBlock name="header_customer_form_login" remove="true"/>
         <referenceContainer name="content">
