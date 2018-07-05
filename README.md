@@ -21,12 +21,16 @@
 
 ## 2. How to install
 
+* Note that just now you need to use a branch of hybridauth to allow this to work.
 
 ## ✓ Install via composer (recommend)
 Run the following command in Magento 2 root folder:
 
 ```
-composer require paramountventures/magento-2-social-login
+composer config repositories.repo-name vcs https://github.com/ParamountVentures/hybridauth 
+composer require hybridauth/hybridauth:dev-b2c-beta 
+composer config repositories.repo-name vcs https://github.com/ParamountVentures/magento-2-social-login 
+composer require paramountventures/magento-2-social-login:dev-master
 php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy
 ```
