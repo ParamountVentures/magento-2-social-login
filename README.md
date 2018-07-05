@@ -227,6 +227,29 @@ Go to `Admin Panel > Social Login > Settings > Google`
 
 The login box will display as popup checkbox after clicking on Google Sign In button.
 
+#### Azure B2C Sign In
+* Note that just now you need to use a branch of hybridauth to allow this to work.
+
+![Branch of Hybridauth](https://github.com/ParamountVentures/hybridauth/tree/b2c-beta)
+
+* Also note - when you use B2C, all other social channels are disabled as it is assumed you 
+will be configuring them via B2C rather than Magento.
+
+##### How to configure Azure B2C
+
+* Create a "Web App / Web API" application your Azure B2C Tenant
+* Set the reply Url to https://domain.com/sociallogin/social/callback/b2c.php
+* Ensure the API access includes the openid scope
+* Save the ClientId and Client Secret
+* Create (or use the default) sign in policy and configure the claims you wish to return
+
+Back in Magento:
+* Go to `Admin Panel > Social Login > Settings > B2C`
+* Set the Client Id to the above value
+* Set the Client Secret to the above value
+* Set your tenant name (i.e. the bit [tenant].onmicrosoft.com)
+* Set the name of policy you have configured the claims to return
+
 #### Twitter Sign In
 
 
