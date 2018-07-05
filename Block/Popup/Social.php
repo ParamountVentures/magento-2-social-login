@@ -58,12 +58,12 @@ class Social extends Template
      * @return array
      */
     public function getAvailableSocials()
-    {
+    {        
         $availabelSocials = [];
 
         foreach ($this->socialHelper->getSocialTypes() as $socialKey => $socialLabel) {
             $this->socialHelper->setType($socialKey);
-            if ($this->socialHelper->isEnabled()) {
+            if ($this->socialHelper->isEnabled()) {                
                 $availabelSocials[$socialKey] = [
                     'label'     => $socialLabel,
                     'login_url' => $this->getLoginUrl($socialKey),
@@ -71,7 +71,21 @@ class Social extends Template
             }
         }
 
+        $this->redirectIfB2C($availabelSocials);
+
         return $availabelSocials;
+    }
+
+  /**
+     * This will immediately redirect the user if B2C is enabled as all social integrations are managed through that.
+     */    
+    private function redirectIfB2C($availabelSocials)
+    {
+        if ($availabelSocials["b2c"] != null)
+        {
+            header('Location: ' . $availabelSocials["b2c"]["login_url"]);
+            exit();
+        }
     }
 
     /**
