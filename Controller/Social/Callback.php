@@ -34,8 +34,7 @@ class Callback extends AbstractSocial
     public function execute()
     {
         // deal with b2c case
-        if (strrpos($_SERVER['SCRIPT_NAME'], 'b2c.php') === strlen($_SERVER['SCRIPT_NAME'])-strlen('b2c.php') 
-        && (isset($_GET['code']))) 
+        if (strrpos($_SERVER['REQUEST_URI'], 'b2c.php') > 0 && (isset($_GET['code'])))         
         {
             $_REQUEST['hauth_done'] = 'B2C';
         }
