@@ -71,7 +71,7 @@ class Social extends Template
             }
         }
 
-        $this->redirectIfB2C($availabelSocials);
+        //$this->redirectIfB2C($availabelSocials);
 
         return $availabelSocials;
     }
