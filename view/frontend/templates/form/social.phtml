@@ -22,6 +22,9 @@
 $availableSocials = $block->getAvailableSocials();
 if ($block->canShow() && sizeof($availableSocials)):
     ?>
+    <div>
+        <h2>Log in with City Messenger</h2>
+    </div>
     <div class="block social-login-authentication-channel account-social-login">
         <div class="block-content">
             <?php foreach ($availableSocials as $key => $social): ?>
