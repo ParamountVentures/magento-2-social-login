@@ -101,7 +101,9 @@ class B2C extends \Hybrid_Provider_Model_OAuth2
 
         if (!empty($data->email))
         {
-            $this->user->profile->email = $data->emails;
+            $this->user->profile->email = $data->email;
+        } else {
+            $this->user->profile->email = $data->name;
         }
 
         return $this->user->profile;
