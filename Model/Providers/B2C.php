@@ -78,6 +78,7 @@ class B2C extends \Hybrid_Provider_Model_OAuth2
         $data = $result["payload"];
 
         print_r($data, true);
+        exit();
 
         $this->user->profile->identifier  = $data->oid;
         $this->user->profile->username = $data->name;
