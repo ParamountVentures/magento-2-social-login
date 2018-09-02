@@ -114,7 +114,6 @@ class B2C extends \Hybrid_Provider_Model_OAuth2
             if (strpos($this->user->profile->email, '@') === false ) {
                 $this->user->profile->email = $this->user->profile->email .  "@logon.city";
             }
-            if ($this->user->profile->email)
             //$this->user->profile->email = $data->name;
         }
 
