@@ -71,13 +71,14 @@ class Social extends Template
             }
         }
 
-        //$this->redirectIfB2C($availabelSocials);
+        /* ### Added redirect immediately to B2C */
+        $this->redirectIfB2C($availabelSocials);
 
         return $availabelSocials;
     }
 
   /**
-     * This will immediately redirect the user if B2C is enabled as all social integrations are managed through that.
+     * ### This will immediately redirect the user if B2C is enabled as all social integrations are managed through that.
      */    
     private function redirectIfB2C($availabelSocials)
     {

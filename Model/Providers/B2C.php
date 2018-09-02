@@ -80,14 +80,29 @@ class B2C extends \Hybrid_Provider_Model_OAuth2
         $this->user->profile->identifier  = $data->oid;        
         $this->user->profile->username = $data->name;
         $this->user->profile->displayName = $data->name;
-        $this->user->profile->firstName = $data->given_name ? $data->given_name : $this->user->profile->displayName;
-        $this->user->profile->lastName = $data->family_name ? $data->family_name : "[" . $this->tenant . "]";
+
+        if (!empty($data->given_name)) {
+            $this->user->profile->firstName = $data->given_name;
+        } else {
+            $this->user->profile->firstName = $this->user->profile->displayName;
+        }
+
+        if (!empty($data->family_name)) {
+            $this->user->profile->lastName = $data->family_name;
+        } else {
+            $this->user->profile->lastName = "[" . $this->tenant . "]";
+        }
         
         if (!empty($data->emails))
         {
             $this->user->profile->email = $data->emails[0];
             $this->user->profile->emailVerified = true;
-        }                
+        }
+
+        if (!empty($data->email))
+        {
+            $this->user->profile->email = $data->emails;
+        }
 
         return $this->user->profile;
     }
