@@ -243,9 +243,21 @@ abstract class AbstractSocial extends Action
         /** @var \Magento\Framework\Controller\Result\Raw $resultRaw */
         $resultRaw = $this->resultRawFactory->create();
 
+        // get the shopping items to see if we need to send the user to the cart
+        $currentItemCount = 0;
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $quoteId = $objectManager->create('Magento\Checkout\Model\Session')->getQuoteId(); 
+        $cartData = $objectManager->create('Magento\Quote\Model\QuoteRepository')->get($quoteId)->getAllVisibleItems();
+        $currentItemCount = count($cartData);
+        
         /* ### Added immediate redirect */
         if ($type == "B2C") {
-            return $resultRaw->setContents($content ?: sprintf("<script>window.location.href='/customer/account/login';</script>"));
+            if ($currentItemCount===0) {
+                return $resultRaw->setContents($content ?: sprintf("<script>window.location.href='/';</script>"));
+            } else {
+                return $resultRaw->setContents($content ?: sprintf("<script>window.location.href='/checkout';</script>"));
+            }
+            
         } else {
             return $resultRaw->setContents($content ?: sprintf("<script>window.opener.socialCallback('%s', window);</script>", $this->_loginPostRedirect()));
         }
