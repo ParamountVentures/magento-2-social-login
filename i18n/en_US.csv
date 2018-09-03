@@ -1,15 +1,5 @@
-<<<<<<< HEAD
-"Registered Customers","Registered Customers"
-"* Required Fields","* Required Fields"
-"If you have an account, sign in with your email address.","If you have an account, sign in with your email address333."
-Email,Email
-Password,Password
-"Forgot Your Password?","Forgot Your Password?"
-Login,Login
-=======
 "New User","New User"
 "Email is Null, Please enter email in your %1 profile","Email is Null, Please enter email in your %1 profile"
->>>>>>> master
 "Incorrect CAPTCHA.","Incorrect CAPTCHA."
 "Data error. Please try again.","Data error. Please try again."
 "Please make sure your passwords match.","Please make sure your passwords match."
