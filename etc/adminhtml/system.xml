@@ -406,6 +406,12 @@
                         <field id="is_enabled">1</field>
                     </depends>
                 </field>
+                <field id="campaignId" translate="label" type="text" sortOrder="43" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Campaign Id</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                </field>
                 <field id="sort_order" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Sort Order</label>
                     <depends>

@@ -177,6 +177,7 @@ Back in Magento:
 * Set the Client Secret to the above value
 * Set your tenant name (i.e. the bit [tenant].onmicrosoft.com)
 * Set the name of policy you have configured the claims to return
+* Set the name of a campaign you have configured
 
 #### Twitter Sign In
 
