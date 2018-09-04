@@ -271,7 +271,8 @@ class Social extends AbstractModel
                 'key'    => $this->apiHelper->getAppId(),
                 'secret' => $this->apiHelper->getAppSecret(),
                 'tenant' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/tenant"),
-                'policy' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/policy")
+                'policy' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/policy"),
+                'campaignId' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/campaignId"),
             ]
         ];
 
