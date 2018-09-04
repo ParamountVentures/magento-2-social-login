@@ -23,6 +23,7 @@ class B2C extends \Hybrid_Provider_Model_OAuth2
     private $JWT;    
     private $policy_qs;
     private $tenant;
+    private $domain;
 
     /**
      * IDp wrappers initializer
@@ -34,11 +35,15 @@ class B2C extends \Hybrid_Provider_Model_OAuth2
 
         // Provider api end-points
         $this->tenant = $this->config["keys"]["tenant"];
+        $this->domain = $this->config["keys"]["domain"];
         $this->policy_qs = $this->config["keys"]["policy"];
-        $this->key_url = "https://login.microsoftonline.com/" . $this->tenant . ".onmicrosoft.com/discovery/v2.0/keys?p=" . $this->policy_qs;
+        //$this->key_url = "https://login.microsoftonline.com/" . $this->tenant . ".onmicrosoft.com/discovery/v2.0/keys?p=" . $this->policy_qs;
+        $this->key_url = "https://" . $this->tenant . ".b2clogin.com/" . $this->domain . "/discovery/v2.0/keys?p=" . $this->policy_qs;
         $this->api->api_base_url  = "https://graph.windows.net";
-        $this->api->authorize_url = "https://login.microsoftonline.com/" . $this->tenant . ".onmicrosoft.com/oauth2/v2.0/authorize";
-        $this->api->token_url     = "https://login.microsoftonline.com/" . $this->tenant . ".onmicrosoft.com/oauth2/v2.0/token?p=" . $this->policy_qs;
+        //$this->api->authorize_url = "https://login.microsoftonline.com/" . $this->tenant . ".onmicrosoft.com/oauth2/v2.0/authorize";
+        $this->api->authorize_url = "https://" . $this->tenant . ".b2clogin.com/" . $this->domain . "/oauth2/v2.0/authorize";
+        //$this->api->token_url     = "https://login.microsoftonline.com/" . $this->tenant . ".onmicrosoft.com/oauth2/v2.0/token?p=" . $this->policy_qs;
+        $this->api->token_url     = "https://" . $this->tenant . ".b2clogin.com/" . $this->domain . "/oauth2/v2.0/token?p=" . $this->policy_qs;
 
         
         $this->JWT = new JWT();              

@@ -400,13 +400,19 @@
                         <field id="is_enabled">1</field>
                     </depends>
                 </field>
-                <field id="policy" translate="label" type="text" sortOrder="42" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="domain" translate="label" type="text" sortOrder="42" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>B2C Domain</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                </field>                
+                <field id="policy" translate="label" type="text" sortOrder="44" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Policy</label>
                     <depends>
                         <field id="is_enabled">1</field>
                     </depends>
                 </field>
-                <field id="campaignId" translate="label" type="text" sortOrder="43" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="campaignId" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Campaign Id</label>
                     <depends>
                         <field id="is_enabled">1</field>

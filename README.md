@@ -178,6 +178,7 @@ Back in Magento:
 * Set your tenant name (i.e. the bit [tenant].onmicrosoft.com)
 * Set the name of policy you have configured the claims to return
 * Set the name of a campaign you have configured
+* Set the name of a domain you have configured
 
 #### Twitter Sign In
 
