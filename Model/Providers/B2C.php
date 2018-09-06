@@ -82,8 +82,7 @@ class B2C extends \Hybrid_Provider_Model_OAuth2
 
         $data = $result["payload"];
 
-        $this->user->profile->identifier  = $data->oid;
-        $this->user->profile->username = $data->name;
+        $this->user->profile->identifier  = $data->oid;        
 
         if (!empty($data->displayName)) {
             $this->user->profile->displayName = $data->displayName;
@@ -119,7 +118,12 @@ class B2C extends \Hybrid_Provider_Model_OAuth2
             if (strpos($this->user->profile->email, '@') === false ) {
                 $this->user->profile->email = $this->user->profile->email .  "@logon.city";
             }
-            //$this->user->profile->email = $data->name;
+        }
+
+        if (!empty($this->user->profile->email)) {
+            $this->user->profile->username = $this->user->profile->email;
+        } else {
+            $this->user->profile->username = $this->user->profile->identifier;
         }
 
         return $this->user->profile;
