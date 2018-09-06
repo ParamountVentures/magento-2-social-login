@@ -273,6 +273,7 @@ class Social extends AbstractModel
                 'tenant' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/tenant"),
                 'policy' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/policy"),
                 'campaignId' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/campaignId"),
+                'policy_password' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/policy_password"),
                 'domain' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/domain")
             ]
         ];
