@@ -38,14 +38,7 @@ class Callback extends AbstractSocial
         {
             $_REQUEST['hauth_done'] = 'B2C';
         }
-
-        // forgotton password redirect
-        if ($this->checkRequest('hauth_start', false) && $this->checkRequest('error_description', 'AADB2C90118'))
-            {
-                // 
-            }
-
-
+        
         if ($this->checkRequest('hauth_start', false) && (
                 $this->checkRequest('error_reason', 'user_denied')
                 && $this->checkRequest('error', 'access_denied')
