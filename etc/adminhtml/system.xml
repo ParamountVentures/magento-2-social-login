@@ -417,6 +417,12 @@
                     <depends>
                         <field id="is_enabled">1</field>
                     </depends>
+                </field>
+                <field id="policy_changepassword" translate="label" type="text" sortOrder="46" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Change Password Policy</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
                 </field>                
                 <field id="campaignId" translate="label" type="text" sortOrder="49" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Campaign Id</label>
