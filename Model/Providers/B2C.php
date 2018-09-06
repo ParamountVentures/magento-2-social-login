@@ -82,18 +82,10 @@ class B2C extends \Hybrid_Provider_Model_OAuth2
 
         $data = $result["payload"];
 
-        $this->user->profile->identifier  = $data->oid;        
-
-        if (!empty($data->displayName)) {
-            $this->user->profile->displayName = $data->displayName;
-        } else {
-            $this->user->profile->displayName = $data->name;
-        }
+        $this->user->profile->identifier  = $data->oid;
 
         if (!empty($data->given_name)) {
             $this->user->profile->firstName = $data->given_name;
-        } else {
-            $this->user->profile->firstName = $this->user->profile->displayName;
         }
 
         if (!empty($data->family_name)) {
@@ -111,19 +103,32 @@ class B2C extends \Hybrid_Provider_Model_OAuth2
         if (!empty($data->email))
         {
             $this->user->profile->email = $data->email;
-        } else {
-            $this->user->profile->email = $this->user->profile->displayName;
-
-            // ensure we have an email as a default or it fails to parse
-            if (strpos($this->user->profile->email, '@') === false ) {
-                $this->user->profile->email = $this->user->profile->email .  "@logon.city";
-            }
         }
 
         if (!empty($this->user->profile->email)) {
             $this->user->profile->username = $this->user->profile->email;
         } else {
             $this->user->profile->username = $this->user->profile->identifier;
+        }
+
+        if (!empty($data->displayName)) {
+            $this->user->profile->displayName = $data->displayName;
+        } else {
+            if (!empty($data->name)) {
+                $this->user->profile->displayName = $data->name;
+            }
+            else {
+                $this->user->profile->displayName = $this->user->profile->identifier;
+            }
+        }
+
+        if (empty($data->email)) {
+            $this->user->profile->email = $this->user->profile->displayName;
+
+            // ensure we have an email as a default or it fails to parse
+            if (strpos($this->user->profile->email, '@') === false ) {
+                $this->user->profile->email = $this->user->profile->email .  "@logon.city";
+            }
         }
 
         return $this->user->profile;
