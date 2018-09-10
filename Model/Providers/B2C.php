@@ -133,8 +133,10 @@ class B2C extends \Hybrid_Provider_Model_OAuth2
 
         if (empty($this->user->profile->displayName)) {
             $this->user->profile->displayName = "my account";
-        }
-
+        }      
+        
+        //var_dump($this->user->profile);
+        //exit();
         return $this->user->profile;
     }
 

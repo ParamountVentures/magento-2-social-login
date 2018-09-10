@@ -242,14 +242,19 @@ abstract class AbstractSocial extends Action
     {
         /** @var \Magento\Framework\Controller\Result\Raw $resultRaw */
         $resultRaw = $this->resultRawFactory->create();
-
+        
         // get the shopping items to see if we need to send the user to the cart
         $currentItemCount = 0;
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $quoteId = $objectManager->create('Magento\Checkout\Model\Session')->getQuoteId(); 
-        $cartData = $objectManager->create('Magento\Quote\Model\QuoteRepository')->get($quoteId)->getAllVisibleItems();
-        $currentItemCount = count($cartData);
         
+        if ($quoteId != NULL) {
+            $cartData = $objectManager->create('Magento\Quote\Model\QuoteRepository')->get($quoteId)->getAllVisibleItems();
+            $currentItemCount = count($cartData);
+        } else {
+            $currentItemCount = 0;
+        }
+
         /* ### Added immediate redirect */
         if ($type == "B2C") {
             if ($currentItemCount===0) {
