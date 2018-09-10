@@ -423,7 +423,19 @@
                     <depends>
                         <field id="is_enabled">1</field>
                     </depends>
-                </field>                
+                </field>   
+                <field id="policy_changeemail" translate="label" type="text" sortOrder="47" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Change Email Policy</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="policy_changeprofile" translate="label" type="text" sortOrder="48" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Change Profile Policy</label>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                </field>                    
                 <field id="campaignId" translate="label" type="text" sortOrder="49" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Campaign Id</label>
                     <depends>

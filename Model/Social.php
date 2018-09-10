@@ -249,8 +249,7 @@ class Social extends AbstractModel
                 $apiName => $this->getProviderData($apiName)
             ],
             "debug_mode" => false
-        ];
-        
+        ];        
         
         $auth    = new \Hybrid_Auth($config);
 
@@ -263,22 +262,25 @@ class Social extends AbstractModel
      * @return array
      */
     public function getProviderData($apiName)
-    {
+    {        
         $data = [
             "enabled" => $this->apiHelper->isEnabled(),
             "keys"    => [
                 'id'     => $this->apiHelper->getAppId(),
                 'key'    => $this->apiHelper->getAppId(),
-                'secret' => $this->apiHelper->getAppSecret(),
+                'secret' => $this->apiHelper->getAppSecret(),                
+                'redirect_url' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/redirect_url"),
                 'tenant' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/tenant"),
                 'policy' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/policy"),
                 'campaignId' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/campaignId"),
                 'policy_password' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/policy_password"),
                 'policy_changepassword' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/policy_changepassword"),
+                'policy_changeemail' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/policy_changeemail"),
+                'policy_changeprofile' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/policy_changeprofile"),
                 'domain' => $this->apiHelper->getConfigValue("sociallogin/" . strtolower($apiName) . "/domain")
             ]
         ];
-
+       
         return array_merge($data, $this->apiHelper->getSocialConfig($apiName));
     }
 }
